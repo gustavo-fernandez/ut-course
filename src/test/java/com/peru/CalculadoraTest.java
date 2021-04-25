@@ -2,6 +2,8 @@ package com.peru;
 
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.function.Executable;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -82,6 +84,18 @@ public class CalculadoraTest {
   @Test
   public void divisionEntreCero() {
     assertThrows(Exception.class, () -> calc.dividir(10, 0));
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = { 2, 0, -1 })
+  public void probarDuplicar(int valorADuplicar) {
+    // given
+    Calculadora calc = new Calculadora();
+    // when
+    int valorDuplicado = calc.duplicar(valorADuplicar);
+    // then
+    int esperado = valorADuplicar * 2;
+    assertEquals(esperado, valorDuplicado);
   }
 
 }

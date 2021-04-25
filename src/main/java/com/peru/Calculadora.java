@@ -25,4 +25,8 @@ public class Calculadora {
     return dividendo / divisor;
   }
 
+  public int duplicar(int x) {
+    return x * 2;
+  }
+
 }
