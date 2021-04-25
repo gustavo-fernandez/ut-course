@@ -1,6 +1,7 @@
 package com.peru;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -78,9 +79,9 @@ public class CalculadoraTest {
     assertEquals(2, resDivision);
   }
 
-  /*@Test(expected = Exception.class)
-  public void divisionEntreCero() throws Exception {
-    calc.dividir(10, 0);
-  }*/
+  @Test
+  public void divisionEntreCero() {
+    assertThrows(Exception.class, () -> calc.dividir(10, 0));
+  }
 
 }

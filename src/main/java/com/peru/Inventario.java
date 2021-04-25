@@ -9,4 +9,19 @@ public class Inventario {
     return p;
   }
 
+  public Producto actualizarPrecio(Producto p) {
+    p.setPrecio(p.getPrecio() + 10.0);
+    return p;
+  }
+
+  public void actualizarInventario() {
+    System.out.println("Ejecutando...");
+    try {
+      Thread.sleep(5_000);
+    } catch (InterruptedException ex) {
+      ex.printStackTrace();
+    }
+    System.out.println("Termino ejecución");
+  }
+
 }
