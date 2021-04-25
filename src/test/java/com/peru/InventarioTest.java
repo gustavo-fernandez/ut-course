@@ -52,8 +52,8 @@ public class InventarioTest {
     Producto producto = inv.getProducto("B");
 
     assertAll(
-        () -> assertEquals("A", producto.getId()),
-        () -> assertEquals(100.0, producto.getPrecio())
+        () -> assertEquals("B", producto.getId()),
+        () -> assertEquals(200.0, producto.getPrecio())
     );
   }
 
