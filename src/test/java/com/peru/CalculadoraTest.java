@@ -1,30 +1,30 @@
 package com.peru;
 
-import org.junit.*;
+import org.junit.jupiter.api.*;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CalculadoraTest {
 
   private Calculadora calc;
 
-  @BeforeClass
+  @BeforeAll
   public static void beforeAll() {
     System.out.println(">> Antes de cualquier test se ejecute");
   }
 
-  @AfterClass
+  @AfterAll
   public static void afterClass() {
     System.out.println(">> Después de que todos se ejecutaron");
   }
 
-  @Before
+  @BeforeEach
   public void beforeXYZ() {
     System.out.println("Antes de cada test");
     calc = new Calculadora();
   }
 
-  @After
+  @AfterEach
   public void after() {
     Calculadora.count = 0;
     System.out.println("después de cada test");
@@ -78,9 +78,9 @@ public class CalculadoraTest {
     assertEquals(2, resDivision);
   }
 
-  @Test(expected = Exception.class)
+  /*@Test(expected = Exception.class)
   public void divisionEntreCero() throws Exception {
     calc.dividir(10, 0);
-  }
+  }*/
 
 }
