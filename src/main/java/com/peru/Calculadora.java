@@ -1,5 +1,7 @@
 package com.peru;
 
+import java.util.Random;
+
 public class Calculadora {
 
   public static int count = 0;
@@ -27,6 +29,15 @@ public class Calculadora {
 
   public int duplicar(int x) {
     return x * 2;
+  }
+
+  public int calcularTamano(String s) {
+    return s == null ? 0 : s.length();
+  }
+
+  public int obtenerValorAleatorioMenorA(int maximo) {
+    Random random = new Random();
+    return random.nextInt(maximo);
   }
 
 }

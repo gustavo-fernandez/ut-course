@@ -1,11 +1,14 @@
 package com.peru;
 
 import org.junit.jupiter.api.*;
-import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
 public class CalculadoraTest {
 
@@ -58,6 +61,7 @@ public class CalculadoraTest {
     assertFalse(integerWrapper == null);
   }
 
+  // @Disabled -> JUnit 5 // En JUnit 4 es @Ignore
   @Test
   public void probarDivision() {
     System.out.println("Ejecutando test division");
@@ -88,7 +92,7 @@ public class CalculadoraTest {
 
   @ParameterizedTest
   @ValueSource(ints = { 2, 0, -1 })
-  public void probarDuplicar(int valorADuplicar) {
+  void probarDuplicar(int valorADuplicar) {
     // given
     Calculadora calc = new Calculadora();
     // when
@@ -96,6 +100,55 @@ public class CalculadoraTest {
     // then
     int esperado = valorADuplicar * 2;
     assertEquals(esperado, valorDuplicado);
+  }
+
+  @ParameterizedTest
+  @NullAndEmptySource
+  @ValueSource(strings = { "hola", "java", "junit" })
+  void testParametrizado(String cadena) {
+    Calculadora calc = new Calculadora();
+
+    int i = calc.calcularTamano(cadena);
+
+    int tamanoEsperado = cadena == null ? 0 : cadena.length();
+    assertEquals(tamanoEsperado, i);
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {"2;4", "0;0", "-1;-2"}, delimiter = ';')
+  void probarDuplicarConCsv(int valorADuplicar, int valorEsperado) {
+    int valorDuplicado = calc.duplicar(valorADuplicar);
+    assertEquals(valorEsperado, valorDuplicado);
+  }
+
+  @ParameterizedTest
+  @CsvFileSource(resources = "/duplicados.csv", numLinesToSkip = 1)
+  void probarDuplicarConArchivoCsv(int valorADuplicar, int valorEsperado) {
+    int valorDuplicado = calc.duplicar(valorADuplicar);
+    assertEquals(valorEsperado, valorDuplicado);
+  }
+
+  @Test
+  void dummyTestWithAssumption() {
+    String javaHomeEnvVar = System.getenv("JAVA_HOME");
+    assumeTrue(javaHomeEnvVar.contains("11.0.2"));
+
+    int a = 2;
+    int b = 3;
+
+    int sum = a + b;
+
+    assertEquals(5, sum);
+  }
+
+  @Test
+  @RepeatedTest(10)
+  void repeatedTest() {
+    Calculadora calc = new Calculadora();
+
+    int i = calc.obtenerValorAleatorioMenorA(10);
+
+    assertTrue(i < 10);
   }
 
 }
