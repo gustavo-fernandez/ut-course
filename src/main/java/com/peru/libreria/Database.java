@@ -9,9 +9,9 @@ public final class Database {
 
   static {
     LIBROS = new ArrayList<>();
-    LIBROS.add(new Libro("100", "Jose", 200));
-    LIBROS.add(new Libro("101", "Maria", 300));
-    LIBROS.add(new Libro("102", "Pedro", 1_000));
+    LIBROS.add(new Libro("100", "Jose Fernandez", 200));
+    LIBROS.add(new Libro("101", "Maria Luisa", 300));
+    LIBROS.add(new Libro("102", "Pedro Infante", 1_000));
   }
 
 }
