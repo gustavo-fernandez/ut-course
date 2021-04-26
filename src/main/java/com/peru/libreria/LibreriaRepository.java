@@ -13,6 +13,7 @@ public class LibreriaRepository implements Repository {
 
   @Override
   public int registrarLibro(Libro libro) {
+    libro.getIsbn().length(); // ...
     Database.LIBROS.add(libro);
     return Database.LIBROS.size() - 1;
   }
